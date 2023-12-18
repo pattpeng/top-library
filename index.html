@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+ <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+<div class='header'> 
+  <div class='header1'>
+    <h2>Patt's Repo</h1>
+  </div>
+  <div class='header2'>
+    <input class ='search-box' placeholder='Search'></input>
+    <div class='search-button'><img class='search-icon' src = 'public/home.svg'></img></div> 
+    <div class='voice-button'><img class='voice-icon' src = 'public/voice-search-icon.svg'></img></div>
+  </div>
+  <div class='header3'>
+  <img class='icon'src= 'public/upload.svg'></img>
+  <img class='icon'src= 'public/notif.svg'></img>
+  <img class='icon' src= 'public/profile.jpg'></img>
+  </div>
+</div>
+
+<div class="middle">
+  <div class="library-top">
+    <h2>Library</h2>
+    <h2>Library</h2>
+    <h2>Library</h2>
+  </div>
+  <div class="library-bottom">
+    <h2>Your Books</h2>
+  <hr>
+  <div class="lib-grid">
+    <div class="lib-items"> 
+      <div class="lib-content">
+        <div class="content-title1">Book Title</div>
+        <div class="content-title2">The Lord of the Ring: The return of the King</div>
+        <div class="content-paget">Page</div>
+        <div class="content-page">4</div>
+        <div class="content-time">22 hours ago</div>
+        <div class="content-read">read</div>
+      </div>
+    </div>
+    <div class="lib-items"> </div>
+    <div class="lib-items"> </div>
+  </div>
+
+  <div class='plus-button'><img class='voice-icon' src = 'public/voice-search-icon.svg'></img></div>
+</div>
+
+<div class="overlay">
+  <!-- The modal content -->
+  <div class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <form action="" method="post">
+      <label for="title">Title:</label>
+      <input type="text" id="title" name="title" placeholder="Book title..">
+
+      <label for="author">Author:</label>
+      <input type="text" id="author" name="author" placeholder="Book author..">
+
+      <label for="pages">Pages:</label>
+      <input type="text" id="pages" name="pages" placeholder="Book pages..">
+
+      <label for="pages">Read:</label>
+      <input type="checkbox" id="read" name="read" placeholder="Book pages..">
+
+      <input type="submit" id="modal-submit" value="Submit">
+    </form>
+  </div>
+</div>
+
+</body>
+
+<script>
+
+const modalOverlay = document.querySelector(".overlay");
+const openModalBtn = document.querySelector(".plus-button");
+const modalSubmitBtn = document.querySelector("#modal-submit");
+const libGrid = document.querySelector(".lib-grid");
+
+function openModal() {
+  modalOverlay.style.display = "flex";
+}
+
+function closeModal() {
+  modalOverlay.style.display = "none";
+}
+
+openModalBtn.addEventListener("click", openModal);
+
+const myLibrary = [];
+
+function Book(title, author, pages, read) {
+  this.title = title;
+  this.author = author;
+  this.pages = pages;
+  this.read = read;
+}
+
+
+
+
+document.querySelector('form').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  let title = document.getElementById('title').value;
+  let author = document.getElementById('author').value;
+  let pages = document.getElementById('pages').value;
+  let read = document.getElementById('read').checked;
+
+  let newBook = new Book(title, author, pages, read);
+  
+  myLibrary.push(newBook);
+
+ 
+  let bookCard = document.createElement('div');
+  bookCard.className = 'lib-items';
+
+
+  let bookContent = document.createElement('div');
+  bookContent.className = 'lib-content';
+
+ 
+  let bookTitle = document.createElement('div');
+  bookTitle.className = 'content-title2';
+  bookTitle.textContent = title;
+  bookContent.appendChild(bookTitle);
+
+  let bookAuthor = document.createElement('div');
+  bookAuthor.className = 'content-author';
+  bookAuthor.textContent = author;
+  bookContent.appendChild(bookAuthor);
+
+ 
+  bookCard.appendChild(bookContent);
+
+
+  libGrid.appendChild(bookCard);
+
+  closeModal();
+
+});
+
+
+
+
+
+function addBookToLibrary() {
+ 
+}
+
+console.log(myLibrary);
+
+</script>
+<style src = "/style.css"></style>
+</html>
